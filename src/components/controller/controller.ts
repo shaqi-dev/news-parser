@@ -1,23 +1,27 @@
 import AppLoader from './appLoader';
 import { GetRespCallback } from './loader';
 
-export interface Controller<T> {
-    getSources(callback: GetRespCallback<T>): void;
-    getNews(e: Event, callback: GetRespCallback<T>): void;
+enum Endpoints {
+    SOURCES = 'sources',
+    EVERYTHING = 'everything',
+}
+export interface Controller {
+    getSources(callback: GetRespCallback): void;
+    getNews(e: Event, callback: GetRespCallback): void;
 }
 
-class AppController<T> extends AppLoader<T> implements Controller<T> {
-    getSources(callback: GetRespCallback<T>) {
+class AppController extends AppLoader implements Controller {
+    public getSources(callback: GetRespCallback) {
         super.getResp(
             {
-                endpoint: 'sources',
+                endpoint: Endpoints.SOURCES,
             },
             callback
         );
     }
 
-    getNews(e: Event, callback: GetRespCallback<T>) {
-        let target = e.target as HTMLElement;
+    public getNews(e: Event, callback: GetRespCallback) {
+        let target = e.target as HTMLDivElement | HTMLSpanElement;
         const newsContainer = e.currentTarget as HTMLDivElement;
 
         while (target !== newsContainer) {
@@ -27,7 +31,7 @@ class AppController<T> extends AppLoader<T> implements Controller<T> {
                     newsContainer.setAttribute('data-source', sourceId);
                     super.getResp(
                         {
-                            endpoint: 'everything',
+                            endpoint: Endpoints.EVERYTHING,
                             options: {
                                 sources: sourceId,
                             },
@@ -37,7 +41,7 @@ class AppController<T> extends AppLoader<T> implements Controller<T> {
                 }
                 return;
             }
-            target = target.parentNode as HTMLElement;
+            target = target.parentNode as HTMLDivElement;
         }
     }
 }

@@ -1,44 +1,49 @@
-interface LoaderOptions {
-    apiKey?: string;
+import { NewsData } from '../models/NewsData.model';
+import { HttpStatusCode } from '../utils/HttpStatusCode';
+
+interface DataLoaderOptions {
+    apiKey: string;
+}
+
+interface GetRespOptions {
     sources?: string;
 }
 
+export type GetRespCallback = (data: NewsData) => void;
+
 interface GetRespParameters {
     endpoint: string;
-    options?: LoaderOptions;
+    options?: GetRespOptions;
 }
 
-export type GetRespCallback<T> = (data: T) => void;
-
-interface DataLoader<T> {
-    baseLink: string;
-    options: LoaderOptions;
-    getResp({ endpoint, options }: GetRespParameters, callback: GetRespCallback<T>): void;
-    errorHandler(res: globalThis.Response): globalThis.Response;
-    makeUrl(options: object, endpoint: string): string;
+interface DataLoader {
+    getResp({ endpoint, options }: GetRespParameters, callback: GetRespCallback): void;
 }
 
-class Loader<T> implements DataLoader<T> {
-    baseLink: string;
-    options: LoaderOptions;
+class Loader implements DataLoader {
+    private baseLink: string;
+    private options: DataLoaderOptions;
 
-    constructor(baseLink: string, options: LoaderOptions) {
+    constructor(baseLink: string, options: DataLoaderOptions) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
-    getResp(
+    public getResp(
         { endpoint, options }: GetRespParameters,
-        callback: GetRespCallback<T> = () => {
+        callback: GetRespCallback = () => {
             console.error('No callback for GET response');
         }
     ) {
         this.load('GET', endpoint, callback, options);
     }
 
-    errorHandler(res: globalThis.Response) {
+    private errorHandler(res: globalThis.Response) {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
+            if (
+                res.status === HttpStatusCode.ClientErrorUnauthorized ||
+                res.status === HttpStatusCode.ClientErrorNotFound
+            )
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }
@@ -46,7 +51,7 @@ class Loader<T> implements DataLoader<T> {
         return res;
     }
 
-    makeUrl(options: object, endpoint: string) {
+    private makeUrl(options: GetRespOptions, endpoint: string) {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -57,11 +62,11 @@ class Loader<T> implements DataLoader<T> {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: GetRespCallback<T>, options = {}) {
+    private load(method: string, endpoint: string, callback: GetRespCallback, options: GetRespOptions = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then((res) => this.errorHandler(res))
-            .then((res) => res.json())
-            .then((data: T) => callback(data))
+            .then((res) => res.json() as Promise<NewsData>)
+            .then((data) => callback(data))
             .catch((err: Error) => console.error(err));
     }
 }
