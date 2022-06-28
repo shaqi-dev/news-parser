@@ -5,11 +5,11 @@ import { NewsData } from '../models/NewsData.model';
 import { ArticlesList } from '../models/ArticlesList.model';
 import { SourcesList } from '../models/SourcesList.model';
 
-type DrawData = (data: NewsData) => void;
+type DataDrawer = (data: NewsData) => void;
 
-interface AppDrawer {
-    drawNews: DrawData;
-    drawSources: DrawData;
+export interface AppDrawer {
+    drawNews: DataDrawer;
+    drawSources: DataDrawer;
 }
 
 export class AppView implements AppDrawer {
