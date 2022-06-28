@@ -1,24 +1,13 @@
 import './news.css';
+import { DataList } from '../../models/dataList.model';
+import { DataItem } from '../../models/dataItem.model';
 
-type NewsData = [];
-
-interface DataItem {
-    title: string;
-    description: string;
-    author: string;
-    publishedAt: string;
-    url: string;
-    urlToImage: string;
-    source: {
-        name: string;
-    };
-}
 interface NewsInterface {
-    draw: (data: NewsData) => void;
+    draw: (data: DataList) => void;
 }
 
 class News implements NewsInterface {
-    draw(data: NewsData) {
+    draw(data: DataList) {
         const news = data.length >= 10 ? data.filter((_, idx) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment();
