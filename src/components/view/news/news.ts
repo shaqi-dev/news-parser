@@ -2,7 +2,7 @@ import './news.css';
 import { ArticlesList } from '../../models/ArticlesList.model';
 import { ArticlesItem } from '../../models/ArticlesItem.model';
 
-interface NewsDrawer {
+export interface NewsDrawer {
     draw: (data: ArticlesList) => void;
 }
 

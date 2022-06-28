@@ -2,7 +2,7 @@ import './sources.css';
 import { SourcesList } from '../../models/SourcesList.model';
 import { SourcesItem } from '../../models/SourcesItem.model';
 
-interface SourcesDrawer {
+export interface SourcesDrawer {
     draw: (data: SourcesList) => void;
 }
 
