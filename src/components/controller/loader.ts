@@ -1,13 +1,14 @@
 interface LoaderOptions {
-    apiKey: string;
+    apiKey?: string;
+    sources?: string;
 }
 
 interface GetRespParameters {
     endpoint: string;
-    options: LoaderOptions;
+    options?: LoaderOptions;
 }
 
-type GetRespCallback<T> = (data: T) => void;
+export type GetRespCallback<T> = (data: T) => void;
 
 interface DataLoader<T> {
     baseLink: string;
