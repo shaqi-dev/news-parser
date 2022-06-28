@@ -1,7 +1,7 @@
 import AppLoader from './appLoader';
 import { GetRespCallback } from './loader';
 
-interface Controller<T> {
+export interface Controller<T> {
     getSources(callback: GetRespCallback<T>): void;
     getNews(e: Event, callback: GetRespCallback<T>): void;
 }
