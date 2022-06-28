@@ -1,29 +1,32 @@
 import News from './news/news';
 import Sources from './sources/sources';
-import { NewsDrawer } from './news/news';
-import { SourcesDrawer } from './sources/sources';
+import { Drawer } from '../models/Drawer.model';
 import { NewsData } from '../models/NewsData.model';
+import { ArticlesList } from '../models/ArticlesList.model';
+import { SourcesList } from '../models/SourcesList.model';
+
+type DrawData = (data: NewsData) => void;
 
 interface AppDrawer {
-    drawNews: (data: NewsData) => void;
-    drawSources: (data: NewsData) => void;
+    drawNews: DrawData;
+    drawSources: DrawData;
 }
 
 export class AppView implements AppDrawer {
-    news: NewsDrawer;
-    sources: SourcesDrawer;
+    private news: Drawer<ArticlesList>;
+    private sources: Drawer<SourcesList>;
 
     constructor() {
         this.news = new News();
         this.sources = new Sources();
     }
 
-    drawNews(data: NewsData) {
+    public drawNews(data: NewsData) {
         const values = data?.articles ? data?.articles : [];
         this.news.draw(values);
     }
 
-    drawSources(data: NewsData) {
+    public drawSources(data: NewsData) {
         const values = data?.sources ? data?.sources : [];
         this.sources.draw(values);
     }

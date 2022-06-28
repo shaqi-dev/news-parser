@@ -1,12 +1,9 @@
 import './news.css';
+import { Drawer } from '../../models/Drawer.model';
 import { ArticlesList } from '../../models/ArticlesList.model';
 import { ArticlesItem } from '../../models/ArticlesItem.model';
 
-export interface NewsDrawer {
-    draw: (data: ArticlesList) => void;
-}
-
-class News implements NewsDrawer {
+class News implements Drawer<ArticlesList> {
     draw(data: ArticlesList) {
         const news = data.length >= 10 ? data.filter((_, idx) => idx < 10) : data;
 

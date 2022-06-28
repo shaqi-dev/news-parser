@@ -1,13 +1,10 @@
 import './sources.css';
+import { Drawer } from '../../models/Drawer.model';
 import { SourcesList } from '../../models/SourcesList.model';
 import { SourcesItem } from '../../models/SourcesItem.model';
 
-export interface SourcesDrawer {
-    draw: (data: SourcesList) => void;
-}
-
-class Sources implements SourcesDrawer {
-    draw(data: SourcesList) {
+class Sources implements Drawer<SourcesList> {
+    public draw(data: SourcesList) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
