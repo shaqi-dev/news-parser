@@ -1,11 +1,13 @@
 export interface DataItem {
-    title: string;
-    description: string;
-    author: string;
-    publishedAt: string;
-    url: string;
-    urlToImage: string;
     source: {
+        id: string;
         name: string;
     };
+    author: string;
+    title: string;
+    description: string;
+    url: string;
+    urlToImage: string;
+    publishedAt: string;
+    content: string;
 }
