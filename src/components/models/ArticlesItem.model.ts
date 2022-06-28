@@ -1,4 +1,4 @@
-export interface DataItem {
+export interface ArticlesItem {
     source: {
         id: string;
         name: string;

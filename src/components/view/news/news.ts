@@ -1,19 +1,19 @@
 import './news.css';
-import { DataList } from '../../models/dataList.model';
-import { DataItem } from '../../models/dataItem.model';
+import { ArticlesList } from '../../models/ArticlesList.model';
+import { ArticlesItem } from '../../models/ArticlesItem.model';
 
 interface NewsDrawer {
-    draw: (data: DataList) => void;
+    draw: (data: ArticlesList) => void;
 }
 
 class News implements NewsDrawer {
-    draw(data: DataList) {
+    draw(data: ArticlesList) {
         const news = data.length >= 10 ? data.filter((_, idx) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment();
         const newsItemTemp = document.querySelector('#newsItemTemp') as HTMLTemplateElement;
 
-        news.forEach((item: DataItem, idx) => {
+        news.forEach((item: ArticlesItem, idx) => {
             const newsClone = newsItemTemp.content.cloneNode(true) as HTMLDivElement;
 
             if (idx % 2) {
