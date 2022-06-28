@@ -2,11 +2,11 @@ import './news.css';
 import { DataList } from '../../models/dataList.model';
 import { DataItem } from '../../models/dataItem.model';
 
-interface NewsInterface {
+interface NewsDrawer {
     draw: (data: DataList) => void;
 }
 
-class News implements NewsInterface {
+class News implements NewsDrawer {
     draw(data: DataList) {
         const news = data.length >= 10 ? data.filter((_, idx) => idx < 10) : data;
 
