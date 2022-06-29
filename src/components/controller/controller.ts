@@ -1,7 +1,7 @@
 import AppLoader from './appLoader';
 import { GetRespCallback } from './loader';
 
-enum Endpoints {
+export enum Endpoints {
     SOURCES = 'sources',
     EVERYTHING = 'everything',
 }

@@ -1,5 +1,6 @@
 import { NewsData } from '../models/NewsData.model';
 import { HttpStatusCode } from '../utils/HttpStatusCode';
+import { Endpoints } from './controller';
 
 interface DataLoaderOptions {
     apiKey: string;
@@ -12,7 +13,7 @@ interface GetRespOptions {
 export type GetRespCallback = (data: NewsData) => void;
 
 interface GetRespParameters {
-    endpoint: string;
+    endpoint: Endpoints | string;
     options?: GetRespOptions;
 }
 
