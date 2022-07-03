@@ -13,10 +13,10 @@ export interface AppDrawer {
 }
 
 export class AppView implements AppDrawer {
-    private news: Drawer<ArticlesList>;
-    private sources: Drawer<SourcesList>;
+    private readonly news: Drawer<ArticlesList>;
+    private readonly sources: Drawer<SourcesList>;
 
-    constructor() {
+    public constructor() {
         this.news = new News();
         this.sources = new Sources();
     }

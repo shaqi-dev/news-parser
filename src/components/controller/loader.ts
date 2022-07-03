@@ -22,10 +22,10 @@ interface DataLoader {
 }
 
 class Loader implements DataLoader {
-    private baseLink: string;
-    private options: DataLoaderOptions;
+    private readonly baseLink: string;
+    private readonly options: DataLoaderOptions;
 
-    constructor(baseLink: string, options: DataLoaderOptions) {
+    public constructor(baseLink: string, options: DataLoaderOptions) {
         this.baseLink = baseLink;
         this.options = options;
     }

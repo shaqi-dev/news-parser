@@ -4,7 +4,7 @@ import { ArticlesList } from '../../models/ArticlesList.model';
 import { ArticlesItem } from '../../models/ArticlesItem.model';
 
 class News implements Drawer<ArticlesList> {
-    draw(data: ArticlesList) {
+    public draw(data: ArticlesList) {
         const news = data.length >= 10 ? data.filter((_, idx) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment();

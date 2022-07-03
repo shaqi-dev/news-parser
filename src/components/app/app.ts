@@ -8,10 +8,10 @@ export interface AppBuilder {
 }
 
 export class App implements AppBuilder {
-    private controller: Controller;
-    private view: AppDrawer;
+    private readonly controller: Controller;
+    private readonly view: AppDrawer;
 
-    constructor() {
+    public constructor() {
         this.controller = new AppController();
         this.view = new AppView();
     }
