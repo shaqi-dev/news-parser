@@ -1,10 +1,7 @@
 import AppLoader from './appLoader';
 import { GetRespCallback } from './loader';
+import { Endpoints } from '../utils/Endpoints';
 
-export enum Endpoints {
-    SOURCES = 'sources',
-    EVERYTHING = 'everything',
-}
 export interface Controller {
     getSources(callback: GetRespCallback): void;
     getNews(e: Event, callback: GetRespCallback): void;
