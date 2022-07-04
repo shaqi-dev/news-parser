@@ -1,10 +1,9 @@
 import './sources.css';
 import { Drawer } from '../../models/Drawer.model';
-import { SourcesList } from '../../models/SourcesList.model';
 import { SourcesItem } from '../../models/SourcesItem.model';
 
-class Sources implements Drawer<SourcesList> {
-    public draw(data: SourcesList) {
+class Sources implements Drawer<SourcesItem[]> {
+    public draw(data: SourcesItem[]) {
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 

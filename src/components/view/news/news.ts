@@ -1,10 +1,9 @@
 import './news.css';
 import { Drawer } from '../../models/Drawer.model';
-import { ArticlesList } from '../../models/ArticlesList.model';
 import { ArticlesItem } from '../../models/ArticlesItem.model';
 
-class News implements Drawer<ArticlesList> {
-    public draw(data: ArticlesList) {
+class News implements Drawer<ArticlesItem[]> {
+    public draw(data: ArticlesItem[]) {
         const news = data.length >= 10 ? data.filter((_, idx) => idx < 10) : data;
 
         const fragment = document.createDocumentFragment();

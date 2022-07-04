@@ -2,8 +2,8 @@ import News from './news/news';
 import Sources from './sources/sources';
 import { Drawer } from '../models/Drawer.model';
 import { NewsData } from '../models/NewsData.model';
-import { ArticlesList } from '../models/ArticlesList.model';
-import { SourcesList } from '../models/SourcesList.model';
+import { ArticlesItem } from '../models/ArticlesItem.model';
+import { SourcesItem } from '../models/SourcesItem.model';
 
 type DataDrawer = (data: NewsData) => void;
 
@@ -13,8 +13,8 @@ export interface AppDrawer {
 }
 
 export class AppView implements AppDrawer {
-    private readonly news: Drawer<ArticlesList>;
-    private readonly sources: Drawer<SourcesList>;
+    private readonly news: Drawer<ArticlesItem[]>;
+    private readonly sources: Drawer<SourcesItem[]>;
 
     public constructor() {
         this.news = new News();
